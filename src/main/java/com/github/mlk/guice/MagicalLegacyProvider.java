@@ -33,28 +33,29 @@ public class MagicalLegacyProvider<T> implements Provider<T>, HasDependencies {
         this.keys = keys;
 
         Class<?>[] ctorTypes = new Class<?>[keys.length];
-        for(int index = 0; index < ctorTypes.length; index++) {
+        for (int index = 0; index < ctorTypes.length; index++) {
             ctorTypes[index] = keys[index].getTypeLiteral().getRawType();
 
         }
-        try {
-            Constructor<?> ctor = null;
-            for (Constructor<?> constructor : clazz.getConstructors()) {
-
-                if (isCompatable(constructor, ctorTypes)) {
-                    ctor = constructor;
-                    break;
-                }
-            }
-            if(ctor != null) {
-                this.ctor = (Constructor<T>)ctor;
-            } else {
-                throw new ProvisionException("Unable to find a constructor matching the given types - " + Arrays.toString(keys));
-            }
-
-        } catch (Exception e) {
-            throw new ProvisionException("Unable to find a constructor matching the given types - " + Arrays.toString(keys), e);
+        Constructor<T> ctor = findConstructor(clazz, ctorTypes);
+        if (ctor != null) {
+            this.ctor =  ctor;
+        } else {
+            throw new ProvisionException("Unable to find a constructor matching the given types - " + Arrays.toString(keys));
         }
+    }
+
+    private Constructor<T> findConstructor(Class<? extends T> clazz, Class<?>[] ctorTypes) {
+        Constructor<?> ctor = null;
+        for (Constructor<?> constructor : clazz.getConstructors()) {
+
+            if (isCompatable(constructor, ctorTypes)) {
+                ctor = constructor;
+                break;
+            }
+        }
+
+        return (Constructor<T>) ctor;
     }
 
     private boolean isCompatable(Constructor<?> constructor, Class<?>[] ctorTypes) {
