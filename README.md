@@ -37,6 +37,18 @@ public class Example {
 }
 ```
 
+## Download
+
+Maven: 
+```
+<dependency>
+  <groupId>com.github.mlk</groupId>
+  <artifactId>magical-provider-guice</artifactId>
+  <version>1.0.0</version>
+</dependency>
+```
+
+
 ## Alternatives
 
 ### [Provider Methods](https://github.com/google/guice/wiki/ProvidesMethods)
