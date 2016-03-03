@@ -1,11 +1,10 @@
-# magical-provider-guice
+package com.github.mlk.guice;
 
-This is in response to a [post on Stack Overflow](http://stackoverflow.com/questions/35746834/pass-parameters-to-constructor-in-guice-with-no-modifications-to-the-interface-i/35747432#35747432). The OP wanted a method of creating legacy components without creating either [Provider](https://google.github.io/guice/api-docs/latest/javadoc/index.html?com/google/inject/Provider.html)s or using [Provides Methods](https://github.com/google/guice/wiki/ProvidesMethods).
+import com.google.inject.*;
+import com.google.inject.name.Named;
 
-For this we will assume that we have a legacy components that we can not change. For example:
+import static com.google.inject.name.Names.named;
 
-
-```
 interface LegacyAction {
 }
 
@@ -14,11 +13,15 @@ class ModernAction implements LegacyAction {
     ModernAction() {}
 }
 
-```
+class LegacyService {
+    public LegacyService(String host, int port, LegacyAction action) {
+        System.out.println("Host: " + host);
+        System.out.println("Port: " + port);
+        System.out.println("Action: " + action.getClass());
 
-Its dependencies (host, port and LegacyAction) are all known by Guice. We want to have Guice also manage LegacyService.
+    }
+}
 
-```
 public class Example {
     public static void main(String... argv) {
         Guice.createInjector(
@@ -35,14 +38,7 @@ public class Example {
                 }).getInstance(LegacyService.class);
     }
 }
-```
 
-## Alternatives
-
-### [Provider Methods](https://github.com/google/guice/wiki/ProvidesMethods)
-
-
-```
 class ExampleWithProviderMethods {
     public static void main(String... argv) {
         Guice.createInjector(
@@ -61,14 +57,7 @@ class ExampleWithProviderMethods {
                 }).getInstance(LegacyService.class);
     }
 }
-```
 
-This requires a tiny amount of additional typing, but gives you type safety. I'd recommend this in most cases!
- 
-### Constructor Binding
-
-
-```
 class ExampleWithConstructorBinding {
     public static void main(String... argv) {
         Guice.createInjector(
@@ -87,6 +76,3 @@ class ExampleWithConstructorBinding {
                 }).getInstance(LegacyService.class);
     }
 }
-```
-
-This works find if you have no [binding annotations](https://github.com/google/guice/wiki/BindingAnnotations). 
