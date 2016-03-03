@@ -9,10 +9,17 @@ For this we will assume that we have a legacy components that we can not change.
 interface LegacyAction {
 }
 
+
+class LegacyService {
+    public LegacyService(String host, int port, LegacyAction action) {
+    }
+}
+
 class ModernAction implements LegacyAction {
     @Inject
     ModernAction() {}
 }
+
 
 ```
 
