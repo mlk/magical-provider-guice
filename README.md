@@ -9,23 +9,20 @@ For this we will assume that we have a legacy components that we can not change.
 interface LegacyAction {
 }
 
-
 class LegacyService {
     public LegacyService(String host, int port, LegacyAction action) {
     }
 }
-
-class ModernAction implements LegacyAction {
-    @Inject
-    ModernAction() {}
-}
-
-
 ```
 
 Its dependencies (host, port and LegacyAction) are all known by Guice. We want to have Guice also manage LegacyService.
 
 ```
+class ModernAction implements LegacyAction {
+    @Inject
+    ModernAction() {}
+}
+
 public class Example {
     public static void main(String... argv) {
         Guice.createInjector(
@@ -46,7 +43,7 @@ public class Example {
 
 ## Download
 
-Maven: 
+*Maven:*
 ```
 <dependency>
   <groupId>com.github.mlk</groupId>
@@ -59,7 +56,6 @@ Maven:
 ## Alternatives
 
 ### [Provider Methods](https://github.com/google/guice/wiki/ProvidesMethods)
-
 
 ```
 class ExampleWithProviderMethods {
@@ -86,7 +82,6 @@ This requires a tiny amount of additional typing, but gives you type safety. I'd
  
 ### Constructor Binding
 
-
 ```
 class ExampleWithConstructorBinding {
     public static void main(String... argv) {
@@ -109,3 +104,7 @@ class ExampleWithConstructorBinding {
 ```
 
 This works find if you have no [binding annotations](https://github.com/google/guice/wiki/BindingAnnotations). 
+
+## Oddities
+
+ * It does not know the difference between int and Integer and will bind to the first on it finds.
