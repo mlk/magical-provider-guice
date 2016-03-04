@@ -43,7 +43,7 @@ public class Example {
 
 ## Download
 
-*Maven:*
+**Maven:**
 ```
 <dependency>
   <groupId>com.github.mlk</groupId>
@@ -51,6 +51,44 @@ public class Example {
   <version>1.0.0</version>
 </dependency>
 ```
+**Apache Buildr**
+
+```
+'com.github.mlk:magical-provider-guice:jar:1.0.0'
+```
+
+**Apache Ivy**
+
+```
+<dependency org="com.github.mlk" name="magical-provider-guice" rev="1.0.0" />
+```
+
+**Groovy Grape**
+
+```
+@Grapes( 
+@Grab(group='com.github.mlk', module='magical-provider-guice', version='1.0.0') 
+)
+```
+
+**Gradle/Grails**
+
+```
+compile 'com.github.mlk:magical-provider-guice:1.0.0'
+```
+
+**Scala SBT**
+```
+libraryDependencies += "com.github.mlk" % "magical-provider-guice" % "1.0.0"
+```
+
+**Leiningen**
+
+[com.github.mlk/magical-provider-guice "1.0.0"]
+
+** Plain old download **
+
+* [Jar File](http://search.maven.org/remotecontent?filepath=com/github/mlk/magical-provider-guice/1.0.0/magical-provider-guice-1.0.0.jar)
 
 
 ## Alternatives
