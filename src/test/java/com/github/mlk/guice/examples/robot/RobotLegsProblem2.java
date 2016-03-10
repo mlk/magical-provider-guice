@@ -1,13 +1,9 @@
 package com.github.mlk.guice.examples.robot;
 
 import com.github.mlk.guice.RoboticLegsModule;
-import com.google.inject.*;
-
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
-import static java.lang.annotation.ElementType.*;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import com.google.inject.Key;
 
 /**
  * This example is based on http://pastie.org/368348#
@@ -37,71 +33,4 @@ public class RobotLegsProblem2 {
 
 }
 
-@Retention(RetentionPolicy.RUNTIME)
-@Target({FIELD, PARAMETER, METHOD})
-@BindingAnnotation
-@interface Blue {
-}
 
-@Retention(RetentionPolicy.RUNTIME)
-@Target({FIELD, PARAMETER, METHOD})
-@BindingAnnotation
-@interface Red {
-}
-
-class Car {
-
-    private final Engine engine;
-    private final Transmission transmission;
-    private final Driveline driveline;
-
-    @Inject
-    public Car(Engine engine, Transmission transmission, Driveline driveline) {
-        this.engine = engine;
-        this.transmission = transmission;
-        this.driveline = driveline;;
-    }
-
-    public Driveline getDriveline() {
-        return driveline;
-    }
-
-    public Engine getEngine() {
-        return engine;
-    }
-
-    public Transmission getTransmission() {
-        return transmission;
-    }
-}
-
-
-interface Transmission {
-}
-
-class AutomaticTransmission implements Transmission {
-}
-
-class ManualTransmission implements Transmission {
-}
-
-interface Engine {
-}
-
-class DieselEngine implements Engine {
-}
-
-class PetrolEngine implements Engine {
-}
-
-interface Driveline {
-}
-
-class FourWheelDrive implements Driveline {
-}
-
-class FrontWheelDrive implements Driveline {
-}
-
-class RearWheelDrive implements Driveline {
-}
