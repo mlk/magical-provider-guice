@@ -1,5 +1,6 @@
-package com.github.mlk.guice;
+package com.github.mlk.guice.examples.legacy;
 
+import com.github.mlk.guice.MagicalLegacyProvider;
 import com.google.inject.*;
 import com.google.inject.name.Named;
 
