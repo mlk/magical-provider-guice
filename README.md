@@ -1,5 +1,14 @@
 # magical-provider-guice
 
+Helper Guice modules.
+
+## Robotic Legs Module
+
+This is to provide a simplified API around creating "[robot legs](https://github.com/google/guice/wiki/FrequentlyAskedQuestions#how-do-i-build-two-similar-but-slightly-different-trees-of-objects)", where you have two (or more) similar, but slightly differents trees of objects.
+
+
+## Legacy Module
+
 This is in response to a [post on Stack Overflow](http://stackoverflow.com/questions/35746834/pass-parameters-to-constructor-in-guice-with-no-modifications-to-the-interface-i/35747432#35747432). The OP wanted a method of creating legacy components without creating either [Provider](https://google.github.io/guice/api-docs/latest/javadoc/index.html?com/google/inject/Provider.html)s or using [Provides Methods](https://github.com/google/guice/wiki/ProvidesMethods).
 
 For this we will assume that we have a legacy components that we can not change. For example:
@@ -41,59 +50,10 @@ public class Example {
 }
 ```
 
-## Download
 
-**Maven:**
-```
-<dependency>
-  <groupId>com.github.mlk</groupId>
-  <artifactId>magical-provider-guice</artifactId>
-  <version>1.0.0</version>
-</dependency>
-```
-**Apache Buildr**
+### Alternatives
 
-```
-'com.github.mlk:magical-provider-guice:jar:1.0.0'
-```
-
-**Apache Ivy**
-
-```
-<dependency org="com.github.mlk" name="magical-provider-guice" rev="1.0.0" />
-```
-
-**Groovy Grape**
-
-```
-@Grapes( 
-@Grab(group='com.github.mlk', module='magical-provider-guice', version='1.0.0') 
-)
-```
-
-**Gradle/Grails**
-
-```
-compile 'com.github.mlk:magical-provider-guice:1.0.0'
-```
-
-**Scala SBT**
-```
-libraryDependencies += "com.github.mlk" % "magical-provider-guice" % "1.0.0"
-```
-
-**Leiningen**
-
-[com.github.mlk/magical-provider-guice "1.0.0"]
-
-** Plain old download **
-
-* [Jar File](http://search.maven.org/remotecontent?filepath=com/github/mlk/magical-provider-guice/1.0.0/magical-provider-guice-1.0.0.jar)
-
-
-## Alternatives
-
-### [Provider Methods](https://github.com/google/guice/wiki/ProvidesMethods)
+#### [Provider Methods](https://github.com/google/guice/wiki/ProvidesMethods)
 
 ```
 class ExampleWithProviderMethods {
@@ -118,7 +78,7 @@ class ExampleWithProviderMethods {
 
 This requires a tiny amount of additional typing, but gives you type safety. I'd recommend this in most cases!
  
-### Constructor Binding
+#### Constructor Binding
 
 ```
 class ExampleWithConstructorBinding {
@@ -143,6 +103,57 @@ class ExampleWithConstructorBinding {
 
 This works find if you have no [binding annotations](https://github.com/google/guice/wiki/BindingAnnotations). 
 
-## Oddities
+### Oddities
 
  * It does not know the difference between int and Integer and will bind to the first on it finds.
+
+## Download
+
+## Download
+
+**Maven:**
+```
+<dependency>
+  <groupId>com.github.mlk</groupId>
+  <artifactId>magical-provider-guice</artifactId>
+  <version>1.0.1</version>
+</dependency>
+```
+**Apache Buildr**
+
+```
+'com.github.mlk:magical-provider-guice:jar:1.0.1'
+```
+
+**Apache Ivy**
+
+```
+<dependency org="com.github.mlk" name="magical-provider-guice" rev="1.0.1" />
+```
+
+**Groovy Grape**
+
+```
+@Grapes( 
+@Grab(group='com.github.mlk', module='magical-provider-guice', version='1.0.1') 
+)
+```
+
+**Gradle/Grails**
+
+```
+compile 'com.github.mlk:magical-provider-guice:1.0.1'
+```
+
+**Scala SBT**
+```
+libraryDependencies += "com.github.mlk" % "magical-provider-guice" % "1.0.1"
+```
+
+**Leiningen**
+
+[com.github.mlk/magical-provider-guice "1.0.0"]
+
+** Plain old download **
+
+* [Jar File](http://search.maven.org/remotecontent?filepath=com/github/mlk/magical-provider-guice/1.0.1/magical-provider-guice-1.0.1.jar)
