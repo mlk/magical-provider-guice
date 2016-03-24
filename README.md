@@ -6,12 +6,16 @@ Helper Guice modules.
 
 This is to provide a simplified API around creating "[robot legs](https://github.com/google/guice/wiki/FrequentlyAskedQuestions#how-do-i-build-two-similar-but-slightly-different-trees-of-objects)", where you have two (or more) similar, but slightly differents trees of objects.
 
+## External Creation Module
+
+This is to support creation of a number of objects where something other than guice creates the objects. For example [Feign](https://github.com/Netflix/feign) or [JDBI](http://jdbi.org/) where the code is an interface with metadata and Feign or JDBI create the objects via [Proxy API](https://docs.oracle.com/javase/7/docs/api/java/lang/reflect/Proxy.html).   
 
 ## Legacy Module
 
 This is in response to a [post on Stack Overflow](http://stackoverflow.com/questions/35746834/pass-parameters-to-constructor-in-guice-with-no-modifications-to-the-interface-i/35747432#35747432). The OP wanted a method of creating legacy components without creating either [Provider](https://google.github.io/guice/api-docs/latest/javadoc/index.html?com/google/inject/Provider.html)s or using [Provides Methods](https://github.com/google/guice/wiki/ProvidesMethods).
 
 For this we will assume that we have a legacy components that we can not change. For example:
+
 
 
 ```
