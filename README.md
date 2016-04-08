@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/mlk/magical-provider-guice.svg?branch=master)](https://travis-ci.org/mlk/magical-provider-guice) [![codecov.io](https://codecov.io/github/mlk/magical-provider-guice/coverage.svg?branch=master)](https://codecov.io/github/mlk/magical-provider-guice?branch=master)
+
 # magical-provider-guice
 
 Helper Guice modules.
