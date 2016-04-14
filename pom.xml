@@ -4,8 +4,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.github.mlk</groupId>
-    <artifactId>magical-provider-guice</artifactId>
-    <version>1.0.1</version>
+     <artifactId>magical-provider-guice</artifactId>
+    <version>1.0.2-SNAPSHOT</version>
     <name>Magical Provider Guice</name>
 
     <description>Magical ways to bind in Guice.</description>
