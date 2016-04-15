@@ -18,7 +18,7 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 public class PassThroughLinkedBindingBuilderTest {
     @Parameterized.Parameters
     public static Object[][] methods() {
-        Method[] methods = LinkedBindingBuilder.class.getDeclaredMethods();
+        Method[] methods = LinkedBindingBuilder.class.getMethods();
         Object[][] params = new Object[methods.length][1];
         for (int i = 0; i < methods.length; i++) {
             params[i][0] = methods[i];

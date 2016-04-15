@@ -15,7 +15,7 @@ import static org.mockito.Mockito.verify;
 public class PassThroughAnnotatedBindingBuilderTest {
     @Parameterized.Parameters
     public static Object[][] methods() {
-        Method[] methods = AnnotatedBindingBuilder.class.getDeclaredMethods();
+        Method[] methods = AnnotatedBindingBuilder.class.getMethods();
         Object[][] params = new Object[methods.length][1];
         for (int i = 0; i < methods.length; i++) {
             params[i][0] = methods[i];
