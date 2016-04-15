@@ -9,6 +9,7 @@ import com.google.inject.TypeLiteral;
 
 import java.io.IOException;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 /** This module takes a function to create new instances and expands the bind methods to allow for a `byMagic()` call.
  */
@@ -36,17 +37,37 @@ public abstract class ExternalCreationModule extends AbstractModule {
      *
      * @param classLoader The class loader to use.
      * @param packageToScan The package that will be scanned.
+     * @param predicate Should this class be bound (true - gets bound, false gets ignored).
      */
-    protected void scan(ClassLoader classLoader, String packageToScan) {
+    protected void scan(ClassLoader classLoader, String packageToScan, Predicate<ClassPath.ClassInfo> predicate) {
         try {
             ClassPath classPath = ClassPath.from(classLoader);
             ImmutableSet<ClassPath.ClassInfo> info = classPath.getTopLevelClasses(packageToScan);
             for(ClassPath.ClassInfo clazz : info) {
-                bind(clazz.load()).byMagic();
+                if(predicate.test(clazz)) {
+                    bind(clazz.load()).byMagic();
+                }
             }
         } catch (IOException e) {
             throw new ProvisionException("Failed to scan package " + packageToScan, e);
         }
+    }
+
+    /** Scans the package provided for classes and binds all of them to the function.
+     *
+     * @param classLoader The class loader to use.
+     * @param packageToScan The package that will be scanned.
+     */
+    protected void scan(ClassLoader classLoader, String packageToScan) {
+        scan(classLoader, packageToScan, x -> true);
+    }
+
+    /** Scans the package provided for classes and binds all of them to the function.
+     *
+     * @param packageToScan The package that will be scanned.
+     */
+    protected void scan(String packageToScan, Predicate<ClassPath.ClassInfo> filter) {
+        scan(this.getClass().getClassLoader(), packageToScan, filter);
     }
 
     /** Scans the package provided for classes and binds all of them to the function.

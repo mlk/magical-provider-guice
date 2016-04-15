@@ -136,5 +136,20 @@ public class ExternalCreationModuleTest {
         assertThat(items.size(), is(2));
     }
 
+    @Test
+    public void scanFiltersOutClassB() {
+        Injector injector = Guice.createInjector(new ExternalCreationModule(this::recordCreation) {
+            @Override
+            protected void configure() {
+                scan("com.github.mlk.guice.external", (x) -> !x.getName().endsWith("B"));
+            }
+        });
+
+        injector.getInstance(A.class);
+        injector.getInstance(B.class);
+
+        assertThat(items.size(), is(1));
+    }
+
 }
 
