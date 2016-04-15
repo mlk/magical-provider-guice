@@ -5,7 +5,7 @@
 
     <groupId>com.github.mlk</groupId>
      <artifactId>magical-provider-guice</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.3-SNAPSHOT</version>
     <name>Magical Provider Guice</name>
 
     <description>Magical ways to bind in Guice.</description>
