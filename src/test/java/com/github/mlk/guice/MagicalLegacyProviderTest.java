@@ -5,11 +5,13 @@ import com.google.inject.Guice;
 import com.google.inject.Key;
 import com.google.inject.ProvisionException;
 import com.google.inject.name.Names;
+import com.google.inject.spi.Dependency;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.util.Objects;
+import java.util.Set;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
@@ -54,6 +56,14 @@ public class MagicalLegacyProviderTest {
                     }
                 }).getInstance(LegacyService.class);
         assertThat(legacyService, is(new LegacyService("DEFAULT", 8080)));
+    }
+
+    @Test
+    public void dependencies() {
+        MagicalLegacyProvider<LegacyService> subject = new MagicalLegacyProvider<>(LegacyService.class, Key.get(int.class, Names.named("port")));
+        Set<Dependency<?>> dependencies =  subject.getDependencies();
+        assertThat(dependencies.size(), is(1));
+        assertThat(dependencies.iterator().next(), is(Dependency.get(Key.get(int.class, Names.named("port")))));
     }
 
     static class LegacyService {
