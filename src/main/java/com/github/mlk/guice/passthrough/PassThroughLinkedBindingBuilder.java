@@ -69,7 +69,7 @@ public class PassThroughLinkedBindingBuilder<T> implements LinkedBindingBuilder<
 
     @Override
     public <S extends T> ScopedBindingBuilder toConstructor(Constructor<S> constructor, TypeLiteral<? extends S> type) {
-        return base.toConstructor(constructor);
+        return base.toConstructor(constructor, type);
     }
 
     @Override
